@@ -48,4 +48,12 @@ describe('actions', () => {
 
     expect(actions.addMessage(message, true)).toEqual(expectedAction);
   });
+
+  it('should have a type of CLEAR_MESSAGES', () => {
+    const expectedAction = {
+      type: 'CLEAR_MESSAGES'
+    };
+
+    expect(actions.clearMessages()).toEqual(expectedAction);
+  });
 });
