@@ -3,7 +3,8 @@ import { startConversation, postMessage, endConversation } from './apiCalls';
 describe('startConversation', () => {
   const mockFeeling = 'stressed';
   const mockResponse = {
-    message: "Hi there, my name is Dr. Watson.  I understand tha…tressed.  What has been most stressful this week?"
+    message:
+      'Hi there, my name is Dr. Watson.  I understand tha…tressed.  What has been most stressful this week?'
   };
 
   beforeEach(() => {
@@ -40,20 +41,23 @@ describe('startConversation', () => {
       });
     });
 
-    expect(startConversation(mockFeeling)).rejects.toEqual(Error('Dr Watson is currently down.  Please try again later.'))
+    expect(startConversation(mockFeeling)).rejects.toEqual(
+      Error('Dr Watson is currently down.  Please try again later.')
+    );
   });
 
   it('should return an error if promise rejects (SAD)', () => {
     window.fetch = jest.fn().mockImplementation(() => {
-      return Promise.reject(Error('fetch failed.'))
+      return Promise.reject(Error('fetch failed.'));
     });
 
-    expect(startConversation(mockFeeling)).rejects.toEqual(Error('fetch failed.'))
+    expect(startConversation(mockFeeling)).rejects.toEqual(
+      Error('fetch failed.')
+    );
   });
 });
 
 describe('endConversation', () => {
-
   beforeEach(() => {
     window.fetch = jest.fn().mockImplementation(() => {
       return Promise.resolve({
@@ -70,7 +74,7 @@ describe('endConversation', () => {
   });
 
   it('should resolve with no errors', () => {
-    expect(endConversation()).resolves.toEqual(undefined)
+    expect(endConversation()).resolves.toEqual(undefined);
   });
 
   it('should return an error (SAD)', () => {
@@ -80,7 +84,11 @@ describe('endConversation', () => {
       });
     });
 
-    expect(endConversation()).rejects.toEqual(Error('There was a problem ending the session.  Please close the application.'));
+    expect(endConversation()).rejects.toEqual(
+      Error(
+        'There was a problem ending the session.  Please close the application.'
+      )
+    );
   });
 
   it('should return an error if promise rejects (SAD)', () => {
@@ -89,5 +97,26 @@ describe('endConversation', () => {
     });
 
     expect(endConversation()).rejects.toEqual(Error('fetch failed.'));
+  });
+
+  describe('postMessage', () => {
+    it('should call fetch with the correct url', () => {
+      const url = 'https://drwatson-api.herokuapp.com/api/message';
+      postMessage('hi');
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ newMessage: 'hi' })
+      };
+
+      expect(window.fetch).toHaveBeenCalledWith(url, options);
+    });
+
+    it('should resolve with no errors', () => {
+      expect(postMessage('HELLO')).resolves.toEqual('HELLO');
+    });
   });
 });
