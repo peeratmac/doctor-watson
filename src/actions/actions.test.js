@@ -18,4 +18,12 @@ describe('actions', () => {
 
     expect(result).toEqual(expectedAction);
   });
+
+  it('should have a type of REMOVE_USER', () => {
+    const expectedAction = {
+      type: 'REMOVE_USER'
+    };
+
+    expect(actions.removeUser()).toEqual(expectedAction);
+  });
 });
