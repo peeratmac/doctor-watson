@@ -179,4 +179,14 @@ describe('mapDispatchToProps', () => {
 
     expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
+
+  it('calls dispatch with clearMessages action when clearMessages is called', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = clearMessages();
+
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.clearMessages();
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
 });
