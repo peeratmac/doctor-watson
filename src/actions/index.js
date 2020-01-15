@@ -1,6 +1,6 @@
 export const createUser = user => ({
   type: 'CREATE_USER',
-  user
+  user: user
 });
 
 export const removeUser = () => ({
@@ -9,5 +9,5 @@ export const removeUser = () => ({
 
 export const hasErrored = errorMsg => ({
   type: 'HAS_ERRORED',
-  errorMsg
-})
+  errorMsg: errorMsg
+});
