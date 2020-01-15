@@ -1,7 +1,7 @@
 export const messagesReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_MESSAGE':
-      return [...state, { message: action.message, user: action.isUser }];
+      return [...state, { message: action.message, isUser: action.isUser }];
     case 'CLEAR_MESSAGES':
       return [];
     default:
