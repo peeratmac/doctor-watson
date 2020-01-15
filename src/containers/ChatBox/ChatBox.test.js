@@ -121,7 +121,7 @@ describe('ChatBox component', () => {
 });
 
 describe('mapStateToProps', () => {
-  it.only('should return an object with the messages and errorMsg information', () => {
+  it('should return an object with the messages and errorMsg information', () => {
     const mockUser = {
       id: 1568665187737,
       firstName: 'Travis',
@@ -163,6 +163,19 @@ describe('mapDispatchToProps', () => {
 
     const mappedProps = mapDispatchToProps(mockDispatch);
     mappedProps.hasErrored('fetch failed');
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  it('calls dispatch with addMessage action when addMessage is called', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = addMessage(
+      'hello, it is me, i was wondering...',
+      true
+    );
+
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.addMessage('hello, it is me, i was wondering...', true);
 
     expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
