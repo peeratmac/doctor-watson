@@ -1,7 +1,7 @@
-export const messagesReducer = (state = '', action) => {
+export const messagesReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SHOW_MESSAGE':
-      return action.message;
+    case 'ADD_MESSAGE':
+      return [...state, { messages: action.messages, user: action.isUser }];
     default:
       return state;
   }

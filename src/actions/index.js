@@ -12,7 +12,8 @@ export const hasErrored = errorMsg => ({
   errorMsg: errorMsg
 });
 
-export const showMessage = message => ({
-  type: 'SHOW_MESSAGE',
-  message: message
+export const addMessage = (message, isUser) => ({
+  type: 'ADD_MESSAGE',
+  messages: message,
+  isUser: isUser
 });
