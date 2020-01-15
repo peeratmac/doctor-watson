@@ -118,5 +118,17 @@ describe('endConversation', () => {
     it('should resolve with no errors', () => {
       expect(postMessage('HELLO')).resolves.toEqual('HELLO');
     });
+
+    it('should return an error (SAD)', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        });
+      });
+
+      expect(postMessage('NOPE')).rejects.toEqual(
+        Error('Dr Watson is currently down.  Please try again later.')
+      );
+    });
   });
 });
