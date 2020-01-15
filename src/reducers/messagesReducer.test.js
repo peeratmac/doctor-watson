@@ -20,4 +20,15 @@ describe('messagesReducer', () => {
 
     expect(result).toEqual(expectedState);
   });
+
+  it('should return the correct state with messages cleared if the action is CLEAR_MESSAGES', () => {
+    const initialState = [{ message: 'hi robbie, hi eric', isUser: true }];
+    const action = {
+      type: 'CLEAR_MESSAGES'
+    };
+    const result = messagesReducer(initialState, action);
+    const expectedState = [];
+
+    expect(result).toEqual(expectedState);
+  });
 });
