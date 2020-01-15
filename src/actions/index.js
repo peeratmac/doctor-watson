@@ -11,3 +11,8 @@ export const hasErrored = errorMsg => ({
   type: 'HAS_ERRORED',
   errorMsg: errorMsg
 });
+
+export const showMessage = message => ({
+  type: 'SHOW_MESSAGE',
+  message: message
+});
